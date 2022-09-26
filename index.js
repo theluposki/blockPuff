@@ -1,1 +1,1 @@
-console.log("\n🐝Running App... 🏃")
+console.log("\n🐝Running App Luposki... 🏃")
