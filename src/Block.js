@@ -28,7 +28,7 @@ export class Block {
   static mineBlock(lastBlock, data) {
     const timestamp = Date.now()
     const lastHash = lastBlock.hash
-    const hash = ""
+    const hash = Block.hash(timestamp, lastHash, data)
 
     return new this(timestamp,lastHash, hash, data)
   }
@@ -36,5 +36,11 @@ export class Block {
   static hash(timestamp, lastHash, data) {
     const str = `${timestamp}${lastHash}${data}`
     return createHash('sha256').update(str).digest('hex');
+  }
+
+  static blockHash(block) {
+    const { timestamp, lastHash, data } = block
+
+    return Block.hash(timestamp, lastHash, data)
   }
 }
