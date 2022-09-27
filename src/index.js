@@ -1,13 +1,7 @@
-console.log("\n🐝Running App Luposki... 🏃")
+import app from "./app/index.js"
+/*
+$ HTTP_PORT = 3002 npm run dev
+*/
+const HTTP_PORT = process.env.HTTP_PORT || 3005
 
-import { Block } from "./Block.js"
-
-const block1 = new Block("adasd","adasd", "sdasd", "asdasd")
-
-const fistBlock = Block.mineBlock(Block.genesis(), { Amount: 5000 })
-
-const hash = Block.hash(Date.now, fistBlock.hash, { Amount: 4000 })
-
-//console.log(block1)
-console.log(fistBlock.toString())
-console.log(hash)
+app.listen(HTTP_PORT, console.log(`\n🐝Running [ App ] at http://localhost:${HTTP_PORT} ... 🏃`))

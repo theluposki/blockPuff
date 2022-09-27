@@ -1,7 +1,7 @@
 import {describe, expect, it} from "@jest/globals"
 import { Block } from "./Block"
 
-import { Blockchain } from "./Blockchain"
+import { Blockchain } from "."
 
 describe("🫐  - Suíte blockchain", () => {
   let bc
