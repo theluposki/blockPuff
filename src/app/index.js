@@ -19,7 +19,7 @@ app.get("/blocks", (req,res) => {
 
 app.post("/mine",(req,res) => {
   const block = bc.addBlock(req.body)
-  //res.redirect("/blocks")
+  p2p.syncChain()
   res.status(201).json({ message: "New Block added.",data: block.data })
 })
 

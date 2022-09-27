@@ -20,11 +20,6 @@ export class p2pServer {
     console.log(`🐝Listening [ P2P ] at ws://localhost:${P2P_PORT} 🧑‍🦲👳🧑‍🦰...`)
   }
 
-  connectSocket(socket) {
-    this.sockets.push(socket)
-    console.log("Socket connected")
-  }
-
   connectToPeers() {
     peers.forEach(peer => {
       const socket = new WebSocket(peer)
@@ -32,5 +27,33 @@ export class p2pServer {
       socket.on("open", () => this.connectSocket(socket))
     })
   }
+
+  connectSocket(socket) {
+    this.sockets.push(socket)
+    console.log("Socket connected")
+
+    this.messageHandler(socket)
+    this.sendChain(socket)
+  }
+
+  sendChain (socket) {
+    socket.send(JSON.stringify(this.blockchain.chain))
+  }
+
+  messageHandler(socket) {
+    socket.on("message", message => {
+
+      const data = JSON.parse(message)
+
+      this.blockchain.replaceChain(data)
+    })
+  }
+
+  syncChain() {
+    this.sockets.forEach(socket => this.sendChain(socket))
+  }
+
 }
+
+
 

@@ -4,12 +4,15 @@
 @endpoint_mine = /mine
 
 @url = {{host}}:{{port}}
+
+
+
 ### Mine
 POST {{url}}{{endpoint_mine}} HTTP/1.1
 content-type: application/json
 
 {
-   "amount":"5000U$" 
+   "amount":"15000U$" 
 }
 ###
 GET {{url}}{{endpoint_blocks}} HTTP/1.1
