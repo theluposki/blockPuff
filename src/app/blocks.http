@@ -1,0 +1,15 @@
+@host = http://localhost
+@port = 3004
+@endpoint_blocks = /blocks
+@endpoint_mine = /mine
+
+@url = {{host}}:{{port}}
+### Mine
+POST {{url}}{{endpoint_mine}} HTTP/1.1
+content-type: application/json
+
+{
+   "amount":"5000U$" 
+}
+###
+GET {{url}}{{endpoint_blocks}} HTTP/1.1
