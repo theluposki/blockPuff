@@ -1,4 +1,4 @@
-import {describe, expect, it} from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
 import { Block } from "./Block"
 
 import { Blockchain } from "."
@@ -23,7 +23,7 @@ describe("🫐  - Suíte blockchain", () => {
 
     bc.addBlock(data)
 
-    expect(bc.chain[bc.chain.length -1].data).toEqual(data)
+    expect(bc.chain[bc.chain.length - 1].data).toEqual(data)
   })
 
 
@@ -42,7 +42,7 @@ describe("🫐  - Suíte blockchain", () => {
   it("Invalidando a corrente `chain` se que tenha algum  bloco corrompido.", () => {
     bc2.addBlock("200U$")
     bc2.chain[1].data = "0U$"
-    
+
     expect(bc.isValidChain(bc2.chain)).toBe(false)
   })
 
@@ -61,4 +61,3 @@ describe("🫐  - Suíte blockchain", () => {
   })
 
 })
-

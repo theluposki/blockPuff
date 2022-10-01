@@ -1,6 +1,5 @@
 import { describe, expect, it } from "@jest/globals"
 import { Block } from "./Block.js"
-import { DIFFICULTY } from "../config.js"
 
 describe("🫐  - Suíte block", () => {
   let data, lastBlock, block
@@ -19,7 +18,14 @@ describe("🫐  - Suíte block", () => {
   })
 
   it("generates a hash that matches the difficulty", () => {
-    expect(block.hash.substring(0, DIFFICULTY)).toEqual("0".repeat(DIFFICULTY))
+    expect(block.hash.substring(0, block.difficulty)).toEqual("0".repeat(block.difficulty))
   })
 
+  it("lowers the difficulty for slowly mined block", () => {
+    expect(Block.adjustDifficulty(block, block.timestamp + 360000)).toEqual(block.difficulty - 1)
+  })
+
+  it("raises the difficulty for quickly mined blocks", () => {
+    expect(Block.adjustDifficulty(block, block.timestamp + 1)).toEqual(block.difficulty + 1)
+  })
 })
