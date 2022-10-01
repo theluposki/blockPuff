@@ -34,6 +34,24 @@ describe("🫐  - Suíte transaction", () => {
       expect(Transaction.verifyTransaction(transaction)).toBe(false)
     })
 
+    describe("updating a transaction", () => {
+      let nextAmount, nextRecipient
+
+      beforeEach(() => {
+        nextAmount = 20
+        nextRecipient = 'next -blockAdrees'
+        transaction = transaction.update(wallet,nextRecipient, nextAmount)
+      })
+
+      it("subtracts the next amount from the sender output", () => {
+        expect(transaction.outputs.find(output => output.adress == wallet.publicKey).amount).toEqual(wallet.balance - amount - nextAmount)
+      })
+
+      it("outputs an amount for the next recipient", () => {
+        expect(transaction.outputs.find(output => output.adress == nextRecipient).amount).toEqual(nextAmount)
+      })
+    })
+
     describe("trasaction with an amount exceeds the balance", () => {
       beforeEach(() => {
         amount = 50000
