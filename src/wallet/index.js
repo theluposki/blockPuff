@@ -14,4 +14,8 @@ export class Wallet {
           balance = ${this.balance}
     `;
   }
+
+  sign(dataHash) {
+    return this.keyPair.sign(dataHash)
+  }
 }
